@@ -57,16 +57,29 @@ function removeDupes(arr){
 
 function buildTree(arr, start, end){
 
+    if(start>end) return null;
     const middle = Math.floor( (start+end)/2)
-    if(start>end) 
-        return null;
     const root = new Node(arr[middle])
 
     root.left = buildTree(arr, start , middle-1)
     root.right = buildTree(arr, middle+1 , end)
-
+    console.log(root.right)
     return root;
 };
+
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+    if (node === null||node.data === undefined) {
+      return;
+    }
+    if (node.right !== null||node.right!==undefined) {
+      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null||node.right!==undefined) {
+      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  };
+ 
 
 // let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let testArr = [1,2,3,4,5,6,7,8,9]
@@ -76,4 +89,4 @@ testArr = removeDupes(testArr);
 // console.log(testArr[testArr.length-1])
 // buildTree(testArr, 0, testArr.length-1)
 const testTree = new Tree(testArr)
-console.log(testTree)
+prettyPrint(testTree.root)
