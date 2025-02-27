@@ -1,12 +1,15 @@
 class Node {
-    consturctor(data){
+    constructor(data){
         this.data = data;
+        this.left = null;
+        this.right=  null;
     }
 };
 
 class Tree {
     constructor(arr){
         this.array = arr;
+        this.root = buildTree(arr, 0, arr[arr.length-1]);
     }
 };
 
@@ -49,17 +52,28 @@ function removeDupes(arr){
         if(arr[i]!=arr[i+1])
             dupelessArr.push(arr[i]);
     };
-    mergeSort(dupelessArr);
     return dupelessArr;
 };
 
-function buildTree(arr){
+function buildTree(arr, start, end){
 
+    const middle = Math.floor( (start+end)/2)
+    if(start>end) 
+        return null;
+    const root = new Node(arr[middle])
+
+    root.left = buildTree(arr, start , middle-1)
+    root.right = buildTree(arr, middle+1 , end)
+
+    return root;
 };
 
-let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-console.log(testArr);
+// let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+let testArr = [1,2,3,4,5,6,7,8,9]
 testArr = mergeSort(testArr);
-console.log(testArr)
 testArr = removeDupes(testArr);
-console.log(testArr)
+// console.log(testArr.length-1)
+// console.log(testArr[testArr.length-1])
+// buildTree(testArr, 0, testArr.length-1)
+const testTree = new Tree(testArr)
+console.log(testTree)
