@@ -43,7 +43,23 @@ function mergeSort(arr){
     };
 }
 
+function removeDupes(arr){
+    let dupelessArr = [];
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i]!=arr[i+1])
+            dupelessArr.push(arr[i]);
+    };
+    mergeSort(dupelessArr);
+    return dupelessArr;
+};
 
 function buildTree(arr){
 
 };
+
+let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+console.log(testArr);
+testArr = mergeSort(testArr);
+console.log(testArr)
+testArr = removeDupes(testArr);
+console.log(testArr)
