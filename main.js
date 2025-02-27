@@ -8,8 +8,10 @@ class Node {
 
 class Tree {
     constructor(arr){
-        this.array = arr;
-        this.root = buildTree(arr, 0, arr[arr.length-1]);
+        this.arr = mergeSort(arr);
+        this.arr =  removeDupes(this.arr);
+        this.end = this.arr.length
+        this.root = buildTree(this.arr, 0, this.end-1);
     }
 };
 
@@ -19,7 +21,7 @@ function mergeSort(arr){
         return baseArray;
     }
     else{
-        const mid = Math.ceil(arr.length / 2);
+        const mid = Math.floor(arr.length / 2);
         const arrLeft = arr.slice(0, mid);
         const arrRight = arr.slice(mid);
         const subArrLeft = mergeSort(arrLeft);
@@ -58,34 +60,31 @@ function removeDupes(arr){
 function buildTree(arr, start, end){
 
     if(start>end) return null;
-    const middle = Math.floor( (start+end)/2)
+    const middle = Math.floor((start+end)/2)
     const root = new Node(arr[middle])
 
     root.left = buildTree(arr, start , middle-1)
     root.right = buildTree(arr, middle+1 , end)
-    console.log(root.right)
     return root;
 };
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
-    if (node === null||node.data === undefined) {
+    if (node === null) {
       return;
     }
-    if (node.right !== null||node.right!==undefined) {
+    if (node.right !== null) {
       prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-    if (node.left !== null||node.right!==undefined) {
+    if (node.left !== null) {
       prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   };
  
 
-// let testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-let testArr = [1,2,3,4,5,6,7,8,9]
-testArr = mergeSort(testArr);
-testArr = removeDupes(testArr);
-// console.log(testArr.length-1)
+let testArr = [10, 40, 30, 20, 80, 90, 40, 30, 50, 70, 60, 10, 10, 10, 10, 20,20,20,30,30,30];
+// let testArr = [1,2,3]
+console.log(testArr.length-1)
 // console.log(testArr[testArr.length-1])
 // buildTree(testArr, 0, testArr.length-1)
 const testTree = new Tree(testArr)
