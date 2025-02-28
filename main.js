@@ -13,6 +13,39 @@ class Tree {
         this.end = this.arr.length
         this.root = buildTree(this.arr, 0, this.end-1);
     }
+    insert(value){
+
+    }
+    deleteItem(value){
+
+    }
+    find(value){
+
+    }
+    levelOrder(callback){
+
+    }
+    inOrder(callback){
+
+    }
+    preOrder(){
+
+    }
+    postOrder(){
+
+    }
+    height(){
+
+    }
+    depth(){
+
+    }
+    isBalanced(){
+
+    }
+    rebalance(){
+
+    }
 };
 
 function mergeSort(arr){
