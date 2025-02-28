@@ -50,10 +50,23 @@ class Tree {
     }
 
     deleteItem(value){
-
+ 
     }
     find(value){
-
+        let current = this.root
+        while(current.data != value){
+            console.log(current)
+            if(value < current.data){
+                    if(current.left != null)
+                        current = current.left;
+            }
+            if(value > current.data){
+                    if(current.right != null)
+                        current = current.right;
+                
+            }
+        } 
+        return current;
     }
     levelOrder(callback){
 
@@ -151,12 +164,14 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 let testArr = [10, 40, 30, 20, 80, 90, 40, 30, 50, 70, 60, 10, 10, 10, 10, 20,20,20,30,30,30];
 const testTree = new Tree(testArr)
 prettyPrint(testTree.root)
-testTree.insert(65);
-testTree.insert(71);
-testTree.insert(65);
-testTree.insert(61);
-testTree.insert(35);
-testTree.insert(25);
-testTree.insert(45);
-testTree.insert(50);
-prettyPrint(testTree.root)
+// console.log(testTree.find(10))
+
+// testTree.insert(65);
+// testTree.insert(71);
+// testTree.insert(65);
+// testTree.insert(61);
+// testTree.insert(35);
+// testTree.insert(25);
+// testTree.insert(45);
+// testTree.insert(50);
+// prettyPrint(testTree.root)
