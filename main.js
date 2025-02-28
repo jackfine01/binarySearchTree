@@ -1,3 +1,13 @@
+//PsuedoCode:
+        // declare current Node/Tree as root of tree:
+            //let current = this.root, we are in the tree already.
+        //"recurse" down the subtree;
+        // exit case: the next Node we are traveling too is null
+            //exit case (if newNode.value < current.data && node.left == null)  --> current.left = newNode;
+            //exit case (if newNode.value > current.data && node.right == null) --> current.right = newNode;
+        // recursive case: if (newNode.value < current.data && node.left != null) --> current = current.left, current.insert(value);
+        // recursive case: if (newNode.value > current.data && node.right != null) --> current = current.right, current.insert(value);
+
 class Node {
     constructor(data){
         this.data = data;
@@ -13,9 +23,32 @@ class Tree {
         this.end = this.arr.length
         this.root = buildTree(this.arr, 0, this.end-1);
     }
-    insert(value){
 
+
+    insert(value){
+        let current = this.root
+
+        while(current.data !== value){
+            if(value < current.data){
+                if(current.left == null)
+                    current.left = new Node(value);
+                else{
+                    if(current.left != null)
+                        current = current.left;
+                }
+            }
+    
+            if(value > current.data){
+                if(current.right == null)
+                    current.right = new Node(value);
+                else{
+                    if(current.right != null)
+                        current = current.right;
+                }
+            }
+        }  
     }
+
     deleteItem(value){
 
     }
@@ -116,9 +149,14 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
  
 
 let testArr = [10, 40, 30, 20, 80, 90, 40, 30, 50, 70, 60, 10, 10, 10, 10, 20,20,20,30,30,30];
-// let testArr = [1,2,3]
-console.log(testArr.length-1)
-// console.log(testArr[testArr.length-1])
-// buildTree(testArr, 0, testArr.length-1)
 const testTree = new Tree(testArr)
+prettyPrint(testTree.root)
+testTree.insert(65);
+testTree.insert(71);
+testTree.insert(65);
+testTree.insert(61);
+testTree.insert(35);
+testTree.insert(25);
+testTree.insert(45);
+testTree.insert(50);
 prettyPrint(testTree.root)
