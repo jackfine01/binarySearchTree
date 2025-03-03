@@ -29,6 +29,7 @@ class Tree {
         let current = this.root
 
         while(current.data !== value){
+
             if(value < current.data){
                 if(current.left == null)
                     current.left = new Node(value);
@@ -50,8 +51,38 @@ class Tree {
     }
 
     deleteItem(value){
- 
+        let current = this.root;
+        //Leaf Case
+            if(find(value).left == null && find(value.right == null)){
+                current = find(value);
+                current.data = null;
+            };
+        //iterate to the node:
+            while(current.data != value){
+                console.log(current)
+                if(value < current.data){
+                        if(current.left != null)
+                            current = current.left;
+                }
+                if(value > current.data){
+                        if(current.right != null)
+                            current = current.right;
+                    
+                }
+            } 
+            //Single Child Case
+            if(current.left != null && current.right == null){
+
+            }else if(current.right != null && current.left == null){
+
+            };
+        //Both Children Case
+            if(value){
+
+            };
+
     }
+
     find(value){
         let current = this.root
         while(current.data != value){
@@ -68,27 +99,35 @@ class Tree {
         } 
         return current;
     }
+
     levelOrder(callback){
 
     }
+
     inOrder(callback){
 
     }
+
     preOrder(){
 
     }
+
     postOrder(){
 
     }
+
     height(){
 
     }
+
     depth(){
 
     }
+
     isBalanced(){
 
     }
+    
     rebalance(){
 
     }
