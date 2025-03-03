@@ -52,33 +52,65 @@ class Tree {
 
     deleteItem(value){
         let current = this.root;
+        let previous;
+        while(current.data != value){
+            if(value < current.data){
+                    if(current.left != null){
+                        previous = current;
+                        current = current.left;
+                    }
+            }
+            if(value > current.data){
+                    if(current.right != null){
+                        previous = current;
+                        current = current.right;
+                    }
+            }
+        }
+        console.log(current) 
+        console.log(current.left)
+        console.log(current.right)
+
+        console.log(previous)
         //Leaf Case
-            if(find(value).left == null && find(value.right == null)){
-                current = find(value);
-                current.data = null;
-            };
-        //iterate to the node:
-            while(current.data != value){
-                console.log(current)
-                if(value < current.data){
-                        if(current.left != null)
-                            current = current.left;
+            if(current.left == null && current.right == null){
+
+                if(current == previous.left){
+                    console.log(previous.left)
+                    previous.left = null;
                 }
-                if(value > current.data){
-                        if(current.right != null)
-                            current = current.right;
-                    
+                if(current == previous.right){
+                    console.log(previous.right)
+                    previous.right = null;
                 }
-            } 
+            }
             //Single Child Case
-            if(current.left != null && current.right == null){
-
-            }else if(current.right != null && current.left == null){
-
-            };
+            else if(current.left != null && current.right == null){
+                let successor = current.left;
+                console.log(successor)
+                previous.left = successor
+            }
+            else if(current.right != null && current.left == null){
+                let successor = current.right;
+                console.log(successor)
+                previous.right = successor
+            }
         //Both Children Case
-            if(value){
+            else {
+                let successorLeft = current.left;
+                let successorRight = current.right;
+                console.log('L:'+successorLeft.data)
+                console.log('R:'+successorRight.data)
 
+                if(current == previous.left){
+                        successorRight.left = successorLeft;
+                        previous.left = successorRight;
+                }
+
+                if(current == previous.right){
+                        successorRight.left = successorLeft;
+                        previous.right = successorRight;
+                }
             };
 
     }
@@ -200,9 +232,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   };
  
 
-let testArr = [10, 40, 30, 20, 80, 90, 40, 30, 50, 70, 60, 10, 10, 10, 10, 20,20,20,30,30,30];
+let testArr = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 const testTree = new Tree(testArr)
-prettyPrint(testTree.root)
+// prettyPrint(testTree.root)
 // console.log(testTree.find(10))
 
 // testTree.insert(65);
@@ -213,4 +245,6 @@ prettyPrint(testTree.root)
 // testTree.insert(25);
 // testTree.insert(45);
 // testTree.insert(50);
-// prettyPrint(testTree.root)
+
+// testTree.deleteItem(80);
+prettyPrint(testTree.root)
